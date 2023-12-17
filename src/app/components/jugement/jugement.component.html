@@ -1,0 +1,46 @@
+<div class="container mx-auto flex modal-overlay p-4">
+
+    <div class="flex-1 bg-gray-100 p-8">
+        <h2 class="text-2xl font-bold mb-4">Fish List</h2>
+        <ul>
+            <li *ngFor="let fish of fishList" (click)="selectFish(fish)"
+                class="cursor-pointer hover:bg-gray-200 p-2 rounded transition-all duration-300">
+                {{ fish.name }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="flex-1 bg-gray-200 p-8">
+        <h2 class="text-2xl font-bold mb-4">Judge Panel</h2>
+        <div *ngIf="selectedFish" class="space-y-4">
+            <h3 class="text-xl">Selected Fish: <span [ngStyle]="{'color':'green'}">{{ selectedFish.name }}</span></h3>
+            <label for="numberOfJudges" class="block text-sm font-medium text-gray-600">Number of Judges:</label>
+            <form [formGroup]="formJuge">
+                <label for="numberOfJudges">Number of Judges:</label>
+                <input type="number" id="numberOfJudges" formControlName="numberOfFish"
+                    class="w-full p-2 border rounded focus:outline-none focus:border-blue-500 transition duration-150">
+
+               <!-- <label for="member_num">Member Number:</label>
+                <input type="number" id="member_num" formControlName="member_num"
+                    class="w-full p-2 border rounded focus:outline-none focus:border-blue-500 transition duration-150"> -->
+
+                <!-- <label for="fish_name">Fish Name:</label>
+                <input type="text" id="fish_name" formControlName="fish_name"
+                    class="w-full p-2 border rounded focus:outline-none focus:border-blue-500 transition duration-150"
+                    [readonly]="true" [value]="selectedFish ? selectedFish.name : ''"> -->
+
+                <!-- <label for="competition_code">Competition Code:</label>
+                <input type="text" id="competition_code" formControlName="competitionCode"
+                    class="w-full p-2 border rounded focus:outline-none focus:border-blue-500 transition duration-150"
+                    [readonly]="true"
+                    [value]="competitionCode ? competitionCode : ''"> -->
+
+                <button type="submit" (click)="judgeFish()"
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150">
+                    Judge
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
