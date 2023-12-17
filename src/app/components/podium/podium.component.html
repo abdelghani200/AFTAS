@@ -1,0 +1,19 @@
+<div class="relative py-16">
+    <div class="container relative m-auto px-6 text-gray-500 md:px-12">
+        <div class="grid gap-6 md:mx-auto md:w-8/12 lg:w-full lg:grid-cols-3">
+            <div *ngFor="let ranking of podium"
+                class="group space-y-6 border border-gray-100 dark:border-gray-700 rounded-3xl bg-white dark:bg-gray-800 px-8 py-12 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
+                <p>
+                    Welcome to podium the competition
+                </p>
+                <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">{{ ranking.competitionCode }}</h3>
+                <a  (click)="navigateToDetails(ranking.competitionCode)"
+                    class="relative mx-auto flex h-10 w-10 items-center justify-center before:absolute before:inset-0 before:rounded-full before:border before:border-gray-100 dark:before:border-gray-600 before:transition before:duration-300 group-hover:before:scale-125">
+                    <span class="text-primary">&rightarrow;</span>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</div>
