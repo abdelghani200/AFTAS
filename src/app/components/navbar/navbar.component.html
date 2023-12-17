@@ -1,0 +1,129 @@
+<!-- <header [ngClass]="{ 'navbarTogglerActive': navbarOpen }" (click)="navbarOpen = !navbarOpen"
+    class="flex w-full items-center bg-white dark:bg-dark">
+    <div class="container mx-auto">
+        <div class="relative -mx-4 flex items-center justify-between">
+            <div class="w-60 max-w-full px-4">
+                <a href="javascript:void(0)" class="block w-full py-5">
+                    <img src="/assets/img/chasse-sous-marine-sous-eau.jpeg" alt="logo" class="h-15 w-30"/>
+                </a>
+            </div>
+            <div class="flex w-full items-center justify-between px-4">
+                <div>
+                    <button id="navbarToggler"
+                        class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
+                        aria-label="Toggle Navigation">
+                        <span class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                        <span class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                        <span class="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
+                    </button>
+                    <nav [ngClass]="{ 'hidden': !navbarOpen }" id="navbarCollapse"
+                        class="absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent">
+                        <ul class="block lg:flex">
+                            <li>
+                                <a [routerLink]="['']"
+                                    class="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-12 lg:inline-flex">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a [routerLink]="['/competitions']"
+                                    class="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-12 lg:inline-flex">
+                                    Compétitions
+                                </a>
+                            </li>
+                            <li>
+                                <a [routerLink]="['/resultats']"
+                                    class="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-12 lg:inline-flex">
+                                    Resultats
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="hidden justify-end pr-16 sm:flex lg:pr-0">
+                    <a
+                        class="px-7 py-3 text-base font-medium text-dark hover:text-primary dark:text-white">
+                        Login
+                    </a>
+                    <a class="rounded-md bg-primary px-7 py-3 text-base font-medium hover:bg-primary/90">
+                        Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<router-outlet></router-outlet> -->
+
+
+<header>
+    <input type="checkbox" name="hbr" id="hbr" class="hbr peer" hidden aria-hidden="true">
+    <nav
+        class="fixed z-20 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur navbar shadow-md shadow-gray-600/5 peer-checked:navbar-active md:relative md:bg-transparent dark:shadow-none">
+        <div class="xl:container m-auto px-6 md:px-12">
+                <div class=" flex flex-wrap items-center justify-between gap-6 md:py-3 md:gap-0">
+                    <div class="w-full flex justify-between lg:w-auto">
+                        <a href="#" aria-label="logo" class="flex space-x-2 items-center">
+                            <img src="/assets/img/chasse-sous-marine-sous-eau.jpeg" alt="image_quiz" class="w-20 h-12">
+                            <span class="text-base font-bold text-gray-600 dark:text-white">ATFAS</span>
+                        </a>
+                        <label for="hbr"
+                            class="peer-checked:hamburger block relative z-20 p-6 -mr-6 cursor-pointer lg:hidden">
+                            <div aria-hidden="true"
+                                class="m-auto h-0.5 w-6 rounded bg-gray-900 dark:bg-gray-300 transition duration-300">
+                            </div>
+                            <div aria-hidden="true"
+                                class="m-auto mt-2 h-0.5 w-6 rounded bg-gray-900 dark:bg-gray-300 transition duration-300">
+                            </div>
+                        </label>
+                    </div>
+                    <div
+                        class="navmenu hidden w-full flex-wrap justify-end items-center mb-16 space-y-8 p-6 border border-gray-100 rounded-3xl shadow-2xl shadow-gray-300/20 bg-white dark:bg-gray-800 lg:space-y-0 lg:p-0 lg:m-0 lg:flex md:flex-nowrap lg:bg-transparent lg:w-7/12 lg:shadow-none dark:shadow-none dark:border-gray-700 lg:border-0">
+                        <div class="text-gray-600 dark:text-gray-300 lg:pr-4">
+                            <ul class="space-y-6 tracking-wide font-medium text-base lg:text-sm lg:flex lg:space-y-0">
+                                <li>
+                                    <a [routerLink]="['']"
+                                        class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['/competitions']"
+                                        class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
+                                        <span>Compétitions</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['/resultats']"
+                                        class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
+                                        <span>Podiums</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['/members']"
+                                        class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
+                                        <span>Members</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div
+                            class="w-full space-y-2 border-primary/10 dark:border-gray-700 flex flex-col -ml-1 sm:flex-row lg:space-y-0 md:w-max lg:border-l">
+                            <a href="#"
+                                class="relative flex h-9 ml-auto items-center justify-center sm:px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary dark:before:bg-primaryLight before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
+                                <span class="relative text-sm font-semibold dark:text-gray-900">Sign Up</span>
+                            </a>
+                            <a href="#"
+                                class="relative flex h-9 ml-auto items-center justify-center sm:px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary dark:before:bg-primaryLight before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
+                                <span class="relative text-sm font-semibold dark:text-gray-900">Login</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </nav>
+</header>
+
+<router-outlet></router-outlet>

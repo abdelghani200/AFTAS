@@ -1,0 +1,65 @@
+<!-- dynamic-form.component.html -->
+
+<form [formGroup]="formGroup" (ngSubmit)="submitForm.emit()" class="py-6 px-9">
+    <div class="mb-4 flex space-x-4">
+        <div class="flex flex-col">
+            <label for="location" class="text-sm font-medium text-gray-500">Location</label>
+            <input type="text" id="location" formControlName="location" placeholder="Enter location"
+                class="mt-1 p-2 border rounded-md">
+        </div>
+
+        <div class="flex flex-col">
+            <label for="date" class="text-sm font-medium text-gray-500">Date</label>
+            <input type="text" id="date" formControlName="date" placeholder="Enter date"
+                class="mt-1 p-2 border rounded-md">
+        </div>
+    </div>
+
+    <div class="mb-4 flex space-x-4">
+        <div class="flex flex-col">
+            <label for="startTime" class="text-sm font-medium text-gray-500">Start Time</label>
+            <input type="text" id="startTime" formControlName="startTime" placeholder="Enter start time"
+                class="mt-1 p-2 border rounded-md">
+        </div>
+
+        <div class="flex flex-col">
+            <label for="endTime" class="text-sm font-medium text-gray-500">End Time</label>
+            <input type="text" id="endTime" formControlName="endTime" placeholder="Enter end time"
+                class="mt-1 p-2 border rounded-md">
+        </div>
+    </div>
+
+    <div class="mb-4 flex space-x-4">
+        <div class="flex flex-col">
+            <label for="numberOfParticipants" class="text-sm font-medium text-gray-500">Number of
+                Participants</label>
+            <input type="text" id="numberOfParticipants" formControlName="numberOfParticipants"
+                placeholder="Enter number of participants" class="mt-1 p-2 border rounded-md">
+        </div>
+
+        <div class="mb-5">
+            <div class="flex flex-col">
+                <label for="amount" class="text-sm font-medium text-gray-500">Amount</label>
+                <input type="text" id="amount" formControlName="amount" placeholder="Enter amount"
+                    class="mt-1 p-2 border rounded-md">
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col">
+        <input type="text" id="code" formControlName="code" placeholder="Generated Code"
+            class="mt-1 p-2 border rounded-md" [readonly]="true" class="hidden">
+    </div>
+
+
+    <div class="mb-5 flex space-x-8">
+        <button type="submit"
+            class="hover:shadow-form w-30 rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+            {{ operation === 'add' ? 'Ajouter' : 'Modifier' }}
+        </button>
+        <button type="button" (click)="cancelEdit.emit()"
+            class="hover:shadow-form w-30 rounded-md bg-[#9D1818] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+            Annuler
+        </button>
+    </div>
+</form>
