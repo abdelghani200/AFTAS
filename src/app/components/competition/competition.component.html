@@ -1,0 +1,45 @@
+<div class="flex space-x-4 mb-4">
+    <button class="bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg m-4" (click)="showAddForm = true">Ajouter
+        une compétition</button>
+    <button *ngFor="let btn of buttons" (click)="handleButtonClick(btn)"
+        class="bg-{{btn.color}}-500 text-white font-semibold px-4 py-2 rounded-lg m-4">{{btn.label}}</button>
+</div>
+
+
+
+
+<div [class.hidden]="!showAddForm" class="popup-form p-4">
+
+<app-form [formGroup]="competitionForm" [operation]="'add'" (submitForm)="addCompetition()"
+  (cancelEdit)="cancelAddOrEdit()"></app-form>
+
+</div>
+
+<div class="relative py-16">
+    <div class="container relative m-auto px-6 text-gray-500 md:px-12">
+        <div class="grid gap-6 md:mx-auto md:w-8/12 lg:w-full lg:grid-cols-3">
+            <div *ngFor="let competition of filteredCompetitions | paginate: { itemsPerPage: pageSize, currentPage: currentPage + 1, totalItems: totalItems }"
+                class="group space-y-6 border border-gray-100 dark:border-gray-700 rounded-3xl bg-white dark:bg-gray-800 px-8 py-12 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
+                <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">{{ competition?.code }}</h3>
+                <p>
+                  {{ competition?.location }} || {{ competition?.date | date: 'yyyy-MM-dd' }}
+                </p>
+                <a *ngIf="competition.code" (click)="navigateToDetails(competition.code.toString())"
+                    class="relative mx-auto flex h-10 w-10 items-center justify-center before:absolute before:inset-0 before:rounded-full before:border before:border-gray-100 dark:before:border-gray-600 before:transition before:duration-300 group-hover:before:scale-125">
+                    <span class="text-primary">&rightarrow;</span>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="flex justify-center mt-4">
+    <pagination-controls (pageChange)="pageChanged($event)" class="my-2"></pagination-controls>
+    <!-- <pagination-controls [itemsPerPage]="pageSize" [currentPage]="currentPage + 1" (pageChange)="pageChanged($event)"></pagination-controls> -->
+</div>
+
+<div *ngIf="filteredCompetitions?.length === 0" class="mt-4">
+    Aucune donnée disponible
+</div>

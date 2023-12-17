@@ -1,0 +1,193 @@
+<div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-8">
+    <button class="bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg m-4" (click)="showAddForm = true">Ajouter
+        un nouveau</button>
+
+    <div class="mb-4 flex space-x-4">
+        <form [formGroup]="formSearch">
+            <input type="text" id="searchTerm" formControlName="searchTerm" placeholder="Rechercher un membre"
+                class="mt-1 p-2 border rounded-md">
+            <button type="button" (click)="searchMembers()"
+                class="bg-green-500 text-white font-semibold px-4 py-2 rounded-lg m-4">Rechercher</button>
+        </form>
+
+    </div>
+
+
+
+    <div [class.hidden]="!showAddForm" class="popup-form p-4">
+        <h2 class="text-lg font-semibold">{{ operation === 'add' ? 'Ajouter' : 'Modifier' }} un niveau</h2>
+        <form [formGroup]="formMember" (ngSubmit)="operation === 'add' ? addMember() : updateMember()"
+            class="py-6 px-9">
+
+            <div class="mb-4 flex space-x-4">
+
+                <div class="mb-5">
+                    <div class="flex flex-col">
+                        <label for="code" class="text-sm font-medium text-gray-500">name</label>
+                        <input type="text" id="code" formControlName="name" placeholder="Generated Code"
+                            class="mt-1 p-2 border rounded-md">
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <div class="flex flex-col">
+                        <label for="numberOfParticipants" class="text-sm font-medium text-gray-500">family name</label>
+                        <input type="text" id="numberOfParticipants" formControlName="familyName"
+                            placeholder="Enter number of participants" class="mt-1 p-2 border rounded-md">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4 flex space-x-4">
+                <div class="mb-5">
+                    <div class="flex flex-col">
+                        <label for="amount" class="text-sm font-medium text-gray-500">identity number</label>
+                        <input type="text" id="amount" formControlName="identityNumber" placeholder="Enter amount"
+                            class="mt-1 p-2 border rounded-md">
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <div class="flex flex-col">
+                        <label for="identityDocumentType" class="text-sm font-medium text-gray-500">identity Document
+                            Type</label>
+                        <input type="text" id="identityDocumentType" formControlName="identityDocumentType"
+                            placeholder="Enter identityDocumentType" class="mt-1 p-2 border rounded-md">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4 flex space-x-4">
+
+                <div class="flex flex-col">
+                    <label for="endTime" class="text-sm font-medium text-gray-500">Accession date</label>
+                    <input type="text" id="endTime" formControlName="accessionDate" placeholder="Enter end time"
+                        class="mt-1 p-2 border rounded-md">
+                </div>
+
+                <div class="mb-5">
+                    <div class="flex flex-col">
+                        <label for="nationality" class="text-sm font-medium text-gray-500">Nationality</label>
+                        <input type="text" id="nationality" formControlName="nationality" placeholder="Enter amount"
+                            class="mt-1 p-2 border rounded-md">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-5 flex space-x-8">
+                <button type="submit"
+                    class="hover:shadow-form w-30 rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                    {{ operation === 'add' ? 'Ajouter' : 'Modifier' }}
+                </button>
+                <button type="button" (click)="cancelAddOrEdit()"
+                    class="hover:shadow-form w-30 rounded-md bg-[#9D1818] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                    Annuler
+                </button>
+            </div>
+        </form>
+    </div>
+
+<!-- 
+
+    <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+        <thead class="bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-4 font-medium text-gray-900 " [ngStyle]="{color:'red'}">ID</th>
+                <th scope="col" class="px-6 py-4 font-medium text-gray-900">name</th>
+                <th scope="col" class="px-6 py-4 font-medium text-gray-900">familyName</th>
+                <th scope="col" class="px-6 py-4 font-medium text-gray-900">nationality</th>
+                <th scope="col" class="px-6 py-4 font-medium text-gray-900">accessionDate</th>
+                <th scope="col" class="px-6 py-4 font-medium text-gray-900">identityNumber</th>
+                <th scope="col" class="px-6 py-4 font-medium text-gray-900">identityDocumentType</th>
+                <th scope="col" class="px-6 py-4 font-medium text-gray-900" style="text-align: center;">Action</th>
+            </tr>
+        </thead>
+        
+        <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+            <tr class="hover:bg-gray-50" *ngFor="let member of filteredMembers">
+                <td class="px-6 py-4">{{ member.num }}</td>
+                <td class="px-6 py-4">{{ member.name }}</td>
+                <td class="px-6 py-4">{{ member.familyName }}</td>
+                <td class="px-6 py-4">{{ member.nationality }}</td>
+                <td class="px-6 py-4">{{ member.accessionDate }}</td>
+                <td class="px-6 py-4">{{ member.identityNumber }}</td>
+                <td class="px-6 py-4">{{ member.identityDocumentType }}</td>
+                <td class="px-6 py-4">
+
+                    <div class="flex justify-center gap-4">
+                        <a x-data="{ tooltip: 'Delete' }">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="h-6 w-6" x-tooltip="tooltip">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                            </svg>
+                        </a>
+                        <a x-data="{ tooltip: 'Edite' }">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="h-6 w-6" x-tooltip="tooltip">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                            </svg>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div> -->
+
+
+
+<table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+    <thead class="bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900 " [ngStyle]="{ color: 'red' }">ID</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">name</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">familyName</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">nationality</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">accessionDate</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">identityNumber</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">identityDocumentType</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900" style="text-align: center;">Action</th>
+      </tr>
+    </thead>
+   
+    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+      <tr class="hover:bg-gray-50" *ngFor="let member of filteredMembers | paginate: { itemsPerPage: pageSize, currentPage: currentPage + 1, totalItems: totalItems }">
+        <td class="px-6 py-4">{{ member.num }}</td>
+        <td class="px-6 py-4">{{ member.name }}</td>
+        <td class="px-6 py-4">{{ member.familyName }}</td>
+        <td class="px-6 py-4">{{ member.nationality }}</td>
+        <td class="px-6 py-4">{{ member.accessionDate }}</td>
+        <td class="px-6 py-4">{{ member.identityNumber }}</td>
+        <td class="px-6 py-4">{{ member.identityDocumentType }}</td>
+        <td class="px-6 py-4">
+          <div class="flex justify-center gap-4">
+            <a x-data="{ tooltip: 'Delete' }" (click)="deleteMember(member.num)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="h-6 w-6" x-tooltip="tooltip">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+              </svg>
+            </a>
+            <a x-data="{ tooltip: 'Edite' }" (click)="editMember(member)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="h-6 w-6" x-tooltip="tooltip">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+              </svg>
+            </a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="flex justify-center mt-4">
+    <pagination-controls (pageChange)="pageChanged($event)" class="my-2"></pagination-controls>
+    <!-- <pagination-controls [itemsPerPage]="pageSize" [currentPage]="currentPage + 1" (pageChange)="pageChanged($event)"></pagination-controls> -->
+  </div>
+  
+  <div *ngIf="filteredMembers?.length === 0" class="mt-4">
+    Aucune donnée disponible
+  </div>
+  
