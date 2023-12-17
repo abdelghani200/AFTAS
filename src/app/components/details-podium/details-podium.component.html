@@ -1,0 +1,33 @@
+
+<div class="container mx-auto mt-8" *ngIf="podium.length >= 3">
+    <h1 class="text-4xl font-bold mb-6 text-center">Podium {{ code }} </h1>
+    <div class="flex justify-center space-x-6">
+        <div class="flex-1 bg-white rounded-md p-6 shadow-lg" *ngFor="let details of podium.slice(0, 3)">
+            <h2 class="text-2xl font-semibold mb-4 text-center">{{ details.rank}}</h2>
+            <div class="flex items-center justify-center mb-4">
+                <div>
+                    <p class="text-lg font-semibold">{{ details.member?.name }} {{ details.member?.familyName }}</p>
+                    <p class="text-gray-600" [ngStyle]="{'text-align':'center'}">{{ details.score }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="w-full border-collapse bg-white text-left text-sm text-gray-500 container mx-auto mt-8" *ngIf="podium.length > 3">
+    <thead class="bg-gray-50">
+        <tr>
+            <th scope="col" class="px-6 py-4 font-medium text-gray-900" [ngStyle]="{'text-align':'center'}">member name</th>
+            <th scope="col" class="px-6 py-4 font-medium text-gray-900" [ngStyle]="{'text-align':'center'}">member score</th>
+            <th scope="col" class="px-6 py-4 font-medium text-gray-900" [ngStyle]="{'text-align':'center'}">member rank</th>
+        </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+        <tr class="hover:bg-gray-50" *ngFor="let details of podium.slice(3)">
+            <td class="px-6 py-4" [ngStyle]="{'text-align':'center'}">{{ details.member?.name}} {{ details.member?.familyName}}</td>
+            <td class="px-6 py-4" [ngStyle]="{'text-align':'center'}">{{ details.score}}</td>
+            <td class="px-6 py-4" [ngStyle]="{'text-align':'center'}">{{ details.rank}}</td>
+        </tr>
+    </tbody>
+</table>
